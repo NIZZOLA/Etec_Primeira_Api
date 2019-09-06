@@ -22,21 +22,7 @@ namespace PrimeiraApi.Validators
         {
             List<string> errors = new List<string>();
 
-            // validacao de unidade
-            if (produto.UnidadeDeMedida == 0)
-            {
-               errors.Add( "Unidade de medida inválida !" );
-            }
             
-            // validação do preço
-            if (produto.ValorDeCusto == 0)
-                errors.Add( "Valor de custo não pode ser zero" );
-
-            if (produto.ValorDeVenda == 0)
-                errors.Add("Valor de venda não pode ser zero");
-
-            if (string.IsNullOrEmpty(produto.Descricao))
-                errors.Add("Descrição não pode ser vazia !");
 
             // validacao descricao e unidade
             var exist = _context.Produto.Where(a => a.Descricao == produto.Descricao &&
