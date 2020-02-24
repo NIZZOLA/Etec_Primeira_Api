@@ -1,4 +1,5 @@
 ﻿using PrimeiraApi.Contracts.Request;
+using PrimeiraApi.Contracts.Response;
 using PrimeiraApi.Models;
 using System;
 using System.Collections.Generic;
@@ -26,5 +27,17 @@ namespace PrimeiraApi.ExtensionMethods
             prod.ValorDeVenda = produto.ValorDeVenda;
             return prod;
         }
+
+        public static ProdutoCreateResponse ConverteParaResponse(this Produto prod)
+        {
+            ProdutoCreateResponse response = new ProdutoCreateResponse();
+            response.Descricao = prod.Descricao;
+            response.MargemDeLucro = prod.MargemDeLucro;
+            response.UnidadeDeMedida = prod.UnidadeDeMedida.ToString();
+            response.ValorDeCusto = prod.ValorDeCusto;
+            response.ValorDeVenda = prod.ValorDeVenda;
+            return response;
+        }
+
     }
 }

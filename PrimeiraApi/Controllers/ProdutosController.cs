@@ -10,6 +10,8 @@ using PrimeiraApi.Data;
 using PrimeiraApi.Models;
 using PrimeiraApi.ExtensionMethods;
 using PrimeiraApi.Validators;
+using AutoMapper;
+using PrimeiraApi.Contracts.Response;
 
 namespace PrimeiraApi.Controllers
 {
@@ -18,10 +20,12 @@ namespace PrimeiraApi.Controllers
     public class ProdutosController : ControllerBase
     {
         private readonly PrimeiraApiContext _context;
+        private readonly IMapper _mapper;
 
-        public ProdutosController(PrimeiraApiContext context)
+        public ProdutosController(PrimeiraApiContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Produtos
@@ -47,7 +51,7 @@ namespace PrimeiraApi.Controllers
                 return NotFound();
             }
 
-            return Ok(produto);
+            return Ok( _mapper.Map<ProdutoCreateResponse>(produto));
         }
 
         // PUT: api/Produtos/5

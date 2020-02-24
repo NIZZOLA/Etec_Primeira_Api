@@ -12,6 +12,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using PrimeiraApi.Data;
 using Swashbuckle.AspNetCore.Swagger;
+using AutoMapper;
+using PrimeiraApi.Contracts.Response;
+using PrimeiraApi.Models;
 
 namespace PrimeiraApi
 {
@@ -48,6 +51,15 @@ namespace PrimeiraApi
                         }
                     });
             });
+
+            #region Automapper
+            var configAutomapper = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Produto, ProdutoCreateResponse>();
+            });
+            IMapper mapper = configAutomapper.CreateMapper();
+            services.AddSingleton(mapper);
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
