@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.EntityFrameworkCore;
-using PrimeiraApi.Data;
-using Swashbuckle.AspNetCore.Swagger;
+﻿using PrimeiraApi.Data;
 using AutoMapper;
 using PrimeiraApi.Contracts.Response;
 using PrimeiraApi.Models;
+using Microsoft.OpenApi.Models;
 
 namespace PrimeiraApi
 {
@@ -30,8 +18,7 @@ namespace PrimeiraApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            
             services.AddDbContext<PrimeiraApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PrimeiraApiContext")));
 
@@ -39,15 +26,15 @@ namespace PrimeiraApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1",
-                    new Info
+                    new OpenApiInfo
                     {
                         Title = "Primeira Api CORE",
                         Version = "v1",
                         Description = "Exemplo de API REST criada com o ASP.NET Core",
-                        Contact = new Contact
+                        Contact = new OpenApiContact
                         {
                             Name = "Prof Nizzola",
-                            Url = "https://github.com/nizzola"
+                            Url = new Uri("https://github.com/nizzola")
                         }
                     });
             });
@@ -63,7 +50,7 @@ namespace PrimeiraApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, Microsoft.Extensions.Hosting.IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {

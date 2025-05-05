@@ -1,10 +1,6 @@
 ﻿using PrimeiraApi.Contracts.Request;
 using PrimeiraApi.Contracts.Response;
 using PrimeiraApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PrimeiraApi.ExtensionMethods
 {

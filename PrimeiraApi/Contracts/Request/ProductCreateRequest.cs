@@ -1,10 +1,4 @@
-﻿using PrimeiraApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace PrimeiraApi.Contracts.Request
+﻿namespace PrimeiraApi.Contracts.Request
 {
     public class ProductCreateRequest
     {
